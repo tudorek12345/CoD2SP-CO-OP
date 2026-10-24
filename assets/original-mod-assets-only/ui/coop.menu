@@ -1,0 +1,712 @@
+// Independently authored COD2 CO-OP native SP UI. Developed by Heperkoo.
+// Exactly ONE menuDef: the installed SP registry has a verified 64-menu limit.
+// Tabs share this menu and use native dvarTest/showDvar visibility.
+{
+    menuDef
+    {
+        name coop_main
+        rect 0 0 640 480
+        fullscreen 0
+        visible 0
+        popup
+        focusColor .98 .827 .58 1
+        onOpen { setdvar coop_page "main"; setfocus coop_host_button; }
+        onESC { close coop_main; open main_text; }
+        itemDef
+        {
+            name coop_panel
+            style 1
+            rect -107 0 854 480
+            backcolor .10 .12 .10 .98
+            visible 1
+            decoration
+        }
+        itemDef
+        {
+            name coop_title
+            text "COD2 CO-OP"
+            type 0
+            rect 46 26 540 24
+            textalign 0
+            textalignx 0
+            textaligny 18
+            textscale .6
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            visible 1
+            decoration
+        }
+        itemDef
+        {
+            name coop_version
+            text "ALPHA 0.1.0"
+            type 0
+            rect 47 94 550 24
+            textalign 0
+            textalignx 0
+            textaligny 18
+            textscale .26
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            visible 1
+            decoration
+        }
+        itemDef
+        {
+            name coop_subtitle_main
+            text "Cooperative Campaign Modification"
+            type 0
+            rect 47 66 550 24
+            textalign 0
+            textalignx 0
+            textaligny 18
+            textscale .34
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            visible 1
+            decoration
+            dvarTest "coop_page"
+            showDvar { "main" }
+        }
+        itemDef
+        {
+            name coop_subtitle_host
+            text "HOST CO-OP MISSION"
+            type 0
+            rect 47 66 550 24
+            textalign 0
+            textalignx 0
+            textaligny 18
+            textscale .34
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            visible 1
+            decoration
+            dvarTest "coop_page"
+            showDvar { "host" }
+        }
+        itemDef
+        {
+            name coop_subtitle_join
+            text "JOIN CO-OP MISSION"
+            type 0
+            rect 47 66 550 24
+            textalign 0
+            textalignx 0
+            textaligny 18
+            textscale .34
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            visible 1
+            decoration
+            dvarTest "coop_page"
+            showDvar { "join" }
+        }
+        itemDef
+        {
+            name coop_subtitle_soldier
+            text "SOVIET SOLDIER SELECTION"
+            type 0
+            rect 47 66 550 24
+            textalign 0
+            textalignx 0
+            textaligny 18
+            textscale .34
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            visible 1
+            decoration
+            dvarTest "coop_page"
+            showDvar { "soldier" }
+        }
+        itemDef
+        {
+            name coop_subtitle_settings
+            text "CONNECTION SETTINGS"
+            type 0
+            rect 47 66 550 24
+            textalign 0
+            textalignx 0
+            textaligny 18
+            textscale .34
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            visible 1
+            decoration
+            dvarTest "coop_page"
+            showDvar { "settings" }
+        }
+        itemDef
+        {
+            name coop_hint_host
+            text "Red Army Training  /  moscow  /  Host + one client"
+            type 0
+            rect 47 131 550 24
+            textalign 0
+            textalignx 0
+            textaligny 18
+            textscale .27
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            visible 1
+            decoration
+            dvarTest "coop_page"
+            showDvar { "host" }
+        }
+        itemDef
+        {
+            name coop_hint_join
+            text "Connect directly over Ethernet or Wi-Fi LAN."
+            type 0
+            rect 47 131 550 24
+            textalign 0
+            textalignx 0
+            textaligny 18
+            textscale .27
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            visible 1
+            decoration
+            dvarTest "coop_page"
+            showDvar { "join" }
+        }
+        itemDef
+        {
+            name coop_hint_soldier
+            text "Two infantry variants found in the installed game:"
+            type 0
+            rect 47 131 550 24
+            textalign 0
+            textalignx 0
+            textaligny 18
+            textscale .27
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            visible 1
+            decoration
+            dvarTest "coop_page"
+            showDvar { "soldier" }
+        }
+        itemDef
+        {
+            name coop_hint_settings
+            text "Enter your local adapter IPv4 for LAN; 127.0.0.1 is this PC."
+            type 0
+            rect 47 131 550 24
+            textalign 0
+            textalignx 0
+            textaligny 18
+            textscale .27
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            visible 1
+            decoration
+            dvarTest "coop_page"
+            showDvar { "settings" }
+        }
+        itemDef
+        {
+            name coop_host_button
+            text "HOST GAME"
+            type 1
+            style 1
+            rect 46 144 270 29
+            textalign 0
+            textalignx 12
+            textaligny 21
+            textscale .33
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            backcolor .20 .23 .18 .9
+            border 1
+            bordercolor .4 .44 .30 .5
+            visible 1
+            mouseEnter { play "mouse_over"; setitemcolor coop_host_button backcolor .33 .36 .23 1; }
+            mouseExit { setitemcolor coop_host_button backcolor .20 .23 .18 .9; }
+            action { play "mouse_click"; setdvar coop_page "host"; setfocus coop_host_create; }
+            dvarTest "coop_page"
+            showDvar { "main" }
+        }
+        itemDef
+        {
+            name coop_join_button
+            text "JOIN GAME"
+            type 1
+            style 1
+            rect 46 181 270 29
+            textalign 0
+            textalignx 12
+            textaligny 21
+            textscale .33
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            backcolor .20 .23 .18 .9
+            border 1
+            bordercolor .4 .44 .30 .5
+            visible 1
+            mouseEnter { play "mouse_over"; setitemcolor coop_join_button backcolor .33 .36 .23 1; }
+            mouseExit { setitemcolor coop_join_button backcolor .20 .23 .18 .9; }
+            action { play "mouse_click"; setdvar coop_page "join"; setfocus coop_join_address; }
+            dvarTest "coop_page"
+            showDvar { "main" }
+        }
+        itemDef
+        {
+            name coop_soldier_button
+            text "SOLDIER"
+            type 1
+            style 1
+            rect 46 218 270 29
+            textalign 0
+            textalignx 12
+            textaligny 21
+            textscale .33
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            backcolor .20 .23 .18 .9
+            border 1
+            bordercolor .4 .44 .30 .5
+            visible 1
+            mouseEnter { play "mouse_over"; setitemcolor coop_soldier_button backcolor .33 .36 .23 1; }
+            mouseExit { setitemcolor coop_soldier_button backcolor .20 .23 .18 .9; }
+            action { play "mouse_click"; setdvar coop_page "soldier"; setfocus coop_soldier_a; }
+            dvarTest "coop_page"
+            showDvar { "main" }
+        }
+        itemDef
+        {
+            name coop_settings_button
+            text "SETTINGS"
+            type 1
+            style 1
+            rect 46 255 270 29
+            textalign 0
+            textalignx 12
+            textaligny 21
+            textscale .33
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            backcolor .20 .23 .18 .9
+            border 1
+            bordercolor .4 .44 .30 .5
+            visible 1
+            mouseEnter { play "mouse_over"; setitemcolor coop_settings_button backcolor .33 .36 .23 1; }
+            mouseExit { setitemcolor coop_settings_button backcolor .20 .23 .18 .9; }
+            action { play "mouse_click"; setdvar coop_page "settings"; setfocus coop_settings_bind; }
+            dvarTest "coop_page"
+            showDvar { "main" }
+        }
+        itemDef
+        {
+            name coop_main_hint
+            text "First mission: Red Army Training (moscow)"
+            type 0
+            rect 47 313 550 24
+            textalign 0
+            textalignx 0
+            textaligny 18
+            textscale .28
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            visible 1
+            decoration
+            dvarTest "coop_page"
+            showDvar { "main" }
+        }
+        itemDef
+        {
+            name coop_settings_bind
+            text "Local bind IPv4: "
+            type 4
+            dvar "coop_bind"
+            rect 46 165 510 28
+            style 1
+            backcolor .03 .04 .03 .85
+            border 1
+            bordercolor .4 .44 .30 .6
+            forecolor .91 .92 .86 1
+            textalign 0
+            textalignx 10
+            textaligny 20
+            textscale .29
+            textfont 1
+            maxchars 15
+            maxPaintChars 15
+            visible 1
+            dvarTest "coop_page"
+            showDvar { "host"; "settings" }
+        }
+        itemDef
+        {
+            name coop_join_address
+            text "Host IPv4: "
+            type 4
+            dvar "coop_address"
+            rect 46 165 510 28
+            style 1
+            backcolor .03 .04 .03 .85
+            border 1
+            bordercolor .4 .44 .30 .6
+            forecolor .91 .92 .86 1
+            textalign 0
+            textalignx 10
+            textaligny 20
+            textscale .29
+            textfont 1
+            maxchars 15
+            maxPaintChars 15
+            visible 1
+            dvarTest "coop_page"
+            showDvar { "join" }
+        }
+        itemDef
+        {
+            name coop_port_field
+            text "UDP port: "
+            type 9
+            dvar "coop_port"
+            rect 46 201 510 28
+            style 1
+            backcolor .03 .04 .03 .85
+            border 1
+            bordercolor .4 .44 .30 .6
+            forecolor .91 .92 .86 1
+            textalign 0
+            textalignx 10
+            textaligny 20
+            textscale .29
+            textfont 1
+            maxchars 5
+            maxPaintChars 5
+            visible 1
+            dvarTest "coop_page"
+            showDvar { "host"; "join"; "settings" }
+        }
+        itemDef
+        {
+            name coop_host_create
+            text "CREATE SESSION"
+            type 1
+            style 1
+            rect 46 245 270 29
+            textalign 0
+            textalignx 12
+            textaligny 21
+            textscale .33
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            backcolor .20 .23 .18 .9
+            border 1
+            bordercolor .4 .44 .30 .5
+            visible 1
+            mouseEnter { play "mouse_over"; setitemcolor coop_host_create backcolor .33 .36 .23 1; }
+            mouseExit { setitemcolor coop_host_create backcolor .20 .23 .18 .9; }
+            action { play "mouse_click"; exec "coop_host"; }
+            dvarTest "coop_page"
+            showDvar { "host" }
+        }
+        itemDef
+        {
+            name coop_host_start
+            text "START MISSION"
+            type 1
+            style 1
+            rect 46 282 270 29
+            textalign 0
+            textalignx 12
+            textaligny 21
+            textscale .33
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            backcolor .20 .23 .18 .9
+            border 1
+            bordercolor .4 .44 .30 .5
+            visible 1
+            mouseEnter { play "mouse_over"; setitemcolor coop_host_start backcolor .33 .36 .23 1; }
+            mouseExit { setitemcolor coop_host_start backcolor .20 .23 .18 .9; }
+            action { play "mouse_click"; exec "coop_start"; }
+            dvarTest "coop_page"
+            showDvar { "host" }
+        }
+        itemDef
+        {
+            name coop_join_connect
+            text "CONNECT"
+            type 1
+            style 1
+            rect 46 245 270 29
+            textalign 0
+            textalignx 12
+            textaligny 21
+            textscale .33
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            backcolor .20 .23 .18 .9
+            border 1
+            bordercolor .4 .44 .30 .5
+            visible 1
+            mouseEnter { play "mouse_over"; setitemcolor coop_join_connect backcolor .33 .36 .23 1; }
+            mouseExit { setitemcolor coop_join_connect backcolor .20 .23 .18 .9; }
+            action { play "mouse_click"; exec "coop_join"; }
+            dvarTest "coop_page"
+            showDvar { "join" }
+        }
+        itemDef
+        {
+            name coop_disconnect_button
+            text "DISCONNECT"
+            type 1
+            style 1
+            rect 46 317 270 29
+            textalign 0
+            textalignx 12
+            textaligny 21
+            textscale .33
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            backcolor .20 .23 .18 .9
+            border 1
+            bordercolor .4 .44 .30 .5
+            visible 1
+            mouseEnter { play "mouse_over"; setitemcolor coop_disconnect_button backcolor .33 .36 .23 1; }
+            mouseExit { setitemcolor coop_disconnect_button backcolor .20 .23 .18 .9; }
+            action { play "mouse_click"; exec "coop_disconnect"; }
+            dvarTest "coop_page"
+            showDvar { "host"; "join"; "settings" }
+        }
+        itemDef
+        {
+            name coop_no_login
+            text "No mod account or login is required."
+            type 0
+            rect 47 263 550 24
+            textalign 0
+            textalignx 0
+            textaligny 18
+            textscale .28
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            visible 1
+            decoration
+            dvarTest "coop_page"
+            showDvar { "settings" }
+        }
+        itemDef
+        {
+            name coop_soldier_a
+            text "SOVIET RIFLEMAN A"
+            type 1
+            style 1
+            rect 46 175 270 29
+            textalign 0
+            textalignx 12
+            textaligny 21
+            textscale .33
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            backcolor .20 .23 .18 .9
+            border 1
+            bordercolor .4 .44 .30 .5
+            visible 1
+            mouseEnter { play "mouse_over"; setitemcolor coop_soldier_a backcolor .33 .36 .23 1; }
+            mouseExit { setitemcolor coop_soldier_a backcolor .20 .23 .18 .9; }
+            action { play "mouse_click"; setdvar coop_soldier_index "0"; exec "coop_soldier 0"; }
+            dvarTest "coop_page"
+            showDvar { "soldier" }
+        }
+        itemDef
+        {
+            name coop_model_a
+            text "character_russian_padded_a"
+            type 0
+            rect 61 207 510 24
+            textalign 0
+            textalignx 0
+            textaligny 18
+            textscale .25
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            visible 1
+            decoration
+            dvarTest "coop_page"
+            showDvar { "soldier" }
+        }
+        itemDef
+        {
+            name coop_soldier_b
+            text "SOVIET RIFLEMAN B"
+            type 1
+            style 1
+            rect 46 246 270 29
+            textalign 0
+            textalignx 12
+            textaligny 21
+            textscale .33
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            backcolor .20 .23 .18 .9
+            border 1
+            bordercolor .4 .44 .30 .5
+            visible 1
+            mouseEnter { play "mouse_over"; setitemcolor coop_soldier_b backcolor .33 .36 .23 1; }
+            mouseExit { setitemcolor coop_soldier_b backcolor .20 .23 .18 .9; }
+            action { play "mouse_click"; setdvar coop_soldier_index "1"; exec "coop_soldier 1"; }
+            dvarTest "coop_page"
+            showDvar { "soldier" }
+        }
+        itemDef
+        {
+            name coop_model_b
+            text "character_russian_padded_b"
+            type 0
+            rect 61 278 510 24
+            textalign 0
+            textalignx 0
+            textaligny 18
+            textscale .25
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            visible 1
+            decoration
+            dvarTest "coop_page"
+            showDvar { "soldier" }
+        }
+        itemDef
+        {
+            name coop_cosmetic
+            text "Cosmetic preference only; actor/model binding is not available yet."
+            type 0
+            rect 47 313 550 24
+            textalign 0
+            textalignx 0
+            textaligny 18
+            textscale .23
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            visible 1
+            decoration
+            dvarTest "coop_page"
+            showDvar { "soldier" }
+        }
+        itemDef
+        {
+            name coop_main_back
+            text "BACK"
+            type 1
+            style 1
+            rect 46 354 270 29
+            textalign 0
+            textalignx 12
+            textaligny 21
+            textscale .33
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            backcolor .20 .23 .18 .9
+            border 1
+            bordercolor .4 .44 .30 .5
+            visible 1
+            mouseEnter { play "mouse_over"; setitemcolor coop_main_back backcolor .33 .36 .23 1; }
+            mouseExit { setitemcolor coop_main_back backcolor .20 .23 .18 .9; }
+            action { play "mouse_click"; close coop_main; open main_text; }
+            dvarTest "coop_page"
+            showDvar { "main" }
+        }
+        itemDef
+        {
+            name coop_tab_back
+            text "BACK"
+            type 1
+            style 1
+            rect 46 354 270 29
+            textalign 0
+            textalignx 12
+            textaligny 21
+            textscale .33
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            backcolor .20 .23 .18 .9
+            border 1
+            bordercolor .4 .44 .30 .5
+            visible 1
+            mouseEnter { play "mouse_over"; setitemcolor coop_tab_back backcolor .33 .36 .23 1; }
+            mouseExit { setitemcolor coop_tab_back backcolor .20 .23 .18 .9; }
+            action { play "mouse_click"; setdvar coop_page "main"; setfocus coop_host_button; }
+            dvarTest "coop_page"
+            showDvar { "host"; "join"; "soldier"; "settings" }
+        }
+        itemDef
+        {
+            name coop_status_text
+            type 0
+            dvar "coop_ui_status"
+            rect 47 398 548 32
+            textalignx 0
+            textaligny 15
+            textscale .24
+            textfont 1
+            forecolor .98 .827 .58 1
+            visible 1
+            decoration
+        }
+        itemDef
+        {
+            name coop_credit
+            text "Developed by Heperkoo - Unofficial modification"
+            type 0
+            rect 47 437 560 24
+            textalign 0
+            textalignx 0
+            textaligny 18
+            textscale .23
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            visible 1
+            decoration
+        }
+        itemDef
+        {
+            name coop_limit
+            text "Development build: independent campaign players are unavailable."
+            type 0
+            rect 47 459 570 24
+            textalign 0
+            textalignx 0
+            textaligny 18
+            textscale .20
+            textfont 1
+            textstyle 3
+            forecolor .91 .92 .86 1
+            visible 1
+            decoration
+        }
+    }
+}

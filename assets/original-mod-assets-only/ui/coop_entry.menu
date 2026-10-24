@@ -1,0 +1,19 @@
+// Independently authored main_text item. Staged into a generated local copy only.
+itemDef
+{
+    name cod2coop_main_entry
+    text "CO-OP (ALPHA)"
+    type 1
+    style 0
+    textstyle 3
+    rect 385 390 190 22
+    textalign 0
+    textalignx 0
+    textaligny 19
+    textscale .4
+    textfont 1
+    forecolor .98 .827 .58 1
+    visible 1
+    mouseEnter { play "mouse_over"; }
+    action { play "mouse_click"; close main_text; open coop_main; }
+}
