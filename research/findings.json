@@ -1,0 +1,92 @@
+{
+  "project": "CoD2SP-CO-OP",
+  "version": "0.1.0-alpha",
+  "analysis_date": "2026-10-24",
+  "scope": "Independently written summary of local binary analysis and original-engine experiments. No proprietary code or assets are embedded.",
+  "target": {
+    "steam_app_id": 2630,
+    "architecture": "Windows x86",
+    "initial_mission": "moscow",
+    "player_limit": 2,
+    "single_player_executable_sha256": "ab17a89cc3722ae80edc1f4483cacbcae08b0373b9128fe4ec053ebc79062281",
+    "multiplayer_executable_sha256": "41124c4620c1e96b8b908611a4135e3ccef4f675f56338d7f85bea6684afdf0e",
+    "single_player_renderer_sha256": "5b364adca51d945e3af2ec321be0646b38cb61ad129849939aca548d4eefa584"
+  },
+  "analysis_coverage": {
+    "installation_files_hashed": 91,
+    "iwd_archives_indexed": 28,
+    "archive_directory_entries": 81663,
+    "initialized_sp_region": {
+      "bytes": 1744896,
+      "discovered_functions": 4447,
+      "decompiled_functions": 4447,
+      "function_entry_references": 21870,
+      "scope": "One bounded code/data region observed after legitimate Steam startup, not the entire process or a rebuilt executable."
+    },
+    "single_player_renderer": {
+      "discovered_functions": 2570,
+      "decompiled_functions": 2567,
+      "decompilation_failures": 3,
+      "analysis_limit_seconds": 180,
+      "complete_analysis": false
+    },
+    "limits": [
+      "Function discovery and decompilation are not independent runtime verification of every function.",
+      "Protected on-disk SP and MP images expose loader code; a complete original engine reconstruction was not achieved.",
+      "Raw initialized code, proprietary extracts and decompiler output remain local and ignored."
+    ]
+  },
+  "native_findings": {
+    "original_game_client_capacity": 1,
+    "game_client_stride_bytes": 34488,
+    "server_client_stride_bytes": 43528,
+    "entity_stride_bytes": 508,
+    "sp_user_command_bytes": 48,
+    "naive_second_client_bytes_before_level_globals_overlap": 72,
+    "native_menu_limit": 64,
+    "extra_player_classname": "coop_player",
+    "native_player_type_requires_separate_render_submission": true,
+    "head_anchor": "j_head",
+    "animation_tree": "generic_human",
+    "checkpoint_format_supports_two_clients": false
+  },
+  "demonstrated_native_test": {
+    "mission": "moscow",
+    "host_client_capacity": 2,
+    "client_backed_entities": 2,
+    "duration_ms": 5008,
+    "host_player_stationary_during_capture": true,
+    "second_player_horizontal_movement_units": 137.656555,
+    "second_player_network_id_stable": true,
+    "moving_commands_sent": 63,
+    "stop_commands_sent": 91,
+    "native_snapshots_received": 96,
+    "world_update_pages_received": 880,
+    "world_position_observations_received": 17459,
+    "original_engine_second_player_movement_verified": true,
+    "client_engine_world_application_verified": false,
+    "two_graphical_game_clients_verified": false,
+    "capture_correction": "The original world capture predates correction of the entity-type field from event-byte offset +4 to SP eType offset +0. Position and player-movement results remain valid; that capture does not validate entity-type classification."
+  },
+  "presentation_status": {
+    "soviet_body_head_helmet_code": "implemented_experimental",
+    "independent_idle_walk_run_animation_code": "implemented_experimental",
+    "head_anchored_nametag_code": "implemented_experimental",
+    "native_render_submission_counters_observed": true,
+    "visible_partner_acceptance": false,
+    "user_report": "Partner still not visible; placement, camera, occlusion and rendered output need verification."
+  },
+  "research_builds": {
+    "opencod2": "x86 build executed; its MP map path rejected the original Moscow campaign map.",
+    "cod2m": "x86 DLL built; not loaded into the original game.",
+    "CoD2rev_Server": "MSVC x86 portability probe failed; no executable produced.",
+    "third_party_source_or_binaries_distributed": false
+  },
+  "next_acceptance_targets": [
+    "Visible Soviet partner near the host, with natural movement and a head-anchored nametag.",
+    "A second original-engine client applying host-authoritative player and world state.",
+    "Shared AI, combat, interactions and mission progression without duplicate client authority.",
+    "Automated original-mission scenarios with engine-level assertions and captured failures.",
+    "A versioned cooperative checkpoint and restore implementation."
+  ]
+}

@@ -9,6 +9,10 @@
 !/assets/
 !/tools/
 !/.github/
+!/research/
+
+/research/*
+!/research/findings.json
 
 /analysis/
 /docs/

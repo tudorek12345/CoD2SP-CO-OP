@@ -4,9 +4,44 @@
 
 **COD2 CO-OP · Cooperative Campaign Modification · Developed by Heperkoo**
 
-Native two-player campaign co-op development for **Call of Duty 2 (2005)**, starting with **Red Army Training (`moscow`)**. Windows 10/11 x64, original x86 Steam game, host-authoritative LAN, one host and one client.
+Bringing **two-player cooperative campaign gameplay to the original Call of Duty 2 engine**, starting with **Red Army Training (`moscow`)**. Original maps, original Soviet campaign setting, host-authoritative simulation and native in-game menus.
 
-**Development checkpoint, not a completed playable release.** Two real player entities and remote movement have been demonstrated inside the host's original mission. A second rendered game client, reliable visible partner presentation and end-to-end campaign synchronization have not been demonstrated.
+### First native breakthrough: player 2 moves in the original campaign world
+
+The runtime creates a second player through the game's own connection, spawn and movement functions. An independent network process has controlled that player inside Moscow while the host remained stationary. Both entities have their own native client state and sentient; the canonical protagonist stays intact.
+
+| Demonstrated milestone | Result |
+|---|---|
+| Real client-backed players in one original SP world | **2** |
+| Remote player-2 movement, host held stationary | **137.66 horizontal game units** |
+| Native player snapshots received in one approximately five-second test | **96** |
+| Original-world update pages received in the same test | **880** |
+| Current Release build and automated CTest suites | **3 suites passed** |
+
+**Current alpha:** host-side player-2 movement and state transport are verified. Reliable visible partner presentation, a second rendered game client and end-to-end campaign synchronization are the next acceptance milestones; this is not yet a completed playable release.
+
+Target: Windows 10/11 x64, original x86 Steam game, exactly one host and one client over LAN.
+
+## Engine analysis: what unlocked this progress
+
+The work has moved from executable inspection to native engine experiments. Analysis of the legitimately initialized SP runtime and renderer recovered the interfaces needed to create and control a real second player.
+
+| Finding | Engineering result |
+|---|---|
+| SP initially allocates one **34,488-byte game-client object**. A naive second slot overlaps level globals after just **72 bytes**. | Client and server-client storage are expanded before BSP entities load, with a reserved player-2 entity slot. |
+| Native connect, begin/spawn and indexed think paths use a mixture of stack and register calling conventions. SP commands are **48 bytes**, so MP layouts cannot be copied blindly. | Exact-build wrappers route received input into native player-2 physics. |
+| The SP renderer exposes a recoverable engine import interface, whose layout differs from MP references. | Hash- and signature-checked native command access and game-thread dispatch are working. |
+| Ordinary SP entity rendering skips player-type entities. | A dedicated submission path for the real player's Soviet body, head and helmet is implemented; visibility still needs confirmation. |
+| Native `j_head`, DObj and world-text interfaces were identified, together with the existing `generic_human` animation tree. | Head-anchored nametag and independent idle/walk/run animation code are implemented, awaiting visual acceptance. |
+| SP has a fixed **64-menu registry**. | Host, Join, Soldier and Settings now share one native menu with tabs, resolving the menu-overflow failure. |
+| Save serialization only writes one client record. | Experimental checkpoint requests are declined through a native nonfatal path; invalid two-player saves are not written. |
+| Native snapshot/camera paths identify the local actor through `playerState.clientNum`. | A thin-client mirror experiment has a concrete native implementation path; runtime integration and testing remain open. |
+
+Local Ghidra analysis discovered **4,447 functions** in a bounded **1,744,896-byte initialized SP code/data region**, with 4,447 decompilations, and **2,570 functions** in the renderer, with 2,567 decompilations. These are analysis coverage counts, not thousands of individually verified interfaces or a reconstructed engine. The renderer pass reached its analysis time limit. Protected on-disk SP/MP images expose loader code rather than a complete engine listing.
+
+Source reconstruction was tested too: an x86 OpenCoD2 build executed against the installed assets but rejected Moscow through its MP-only map path; cod2m built as an x86 DLL; the CoD2rev_Server MSVC probe hit portability errors. This supports continuing with the original SP runtime to preserve the campaign's existing AI, dialogue and scripts.
+
+A compact, independently written [findings and validation summary](research/findings.json) is tracked. Proprietary extracts, raw initialized code, decompiler output and reference repositories stay local and ignored.
 
 ## Implemented and tested
 
@@ -19,6 +54,8 @@ Native two-player campaign co-op development for **Call of Duty 2 (2005)**, star
 - Automated protocol/session, world-tracking and launcher UI checks; independent-process packet-loss/duplicate-delivery tests.
 
 ## Current implementation work
+
+**Next visible milestone:** a Soviet partner placed near the host, with a verified body, animation and head-anchored name. After that, the priority is a second original-engine client applying host state while local campaign authority stays frozen.
 
 - **Visible Soviet partner and nametag:** body/head/helmet assignment, idle/walk/run tree, native body submission and a `j_head` nametag are implemented as experimental code. Render counters ran, but the user still could not see the partner. Visibility, placement and animation acceptance remain open.
 - **Low-level diagnostics:** native entity/client observations, stack diagnostics, model/bone/camera reports and a collision-checked regroup helper exist. The newest regroup/diagnostic helpers still need launcher wiring and runtime verification.
@@ -75,7 +112,7 @@ Packaging creates `dist/COD2-Coop-0.1.0-alpha/` and a ZIP containing mod binarie
 
 ## Repository scope
 
-Tracked: independently authored source, native UI, tests, build/staging/diagnostic tools, this README and the representative main-menu capture above.
+Tracked: independently authored source, native UI, tests, build/staging/diagnostic tools, this README, a concise research findings summary and the representative main-menu capture above.
 
 Ignored locally: `docs/`, all `analysis/` including the three research repositories, decompiler output/databases, extracted proprietary assets, captures/logs, saves, builds and packages. Private or occluded desktop captures are excluded; only the selected README image is published.
 
